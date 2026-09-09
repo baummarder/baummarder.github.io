@@ -44,6 +44,13 @@
             border: 4px solid #2b4c7e;
         }
 
+        .pfp-caption {
+            font-size: 12px;
+            color: #777;
+            margin-top: 8px;
+            font-style: italic;
+        }
+
         .download_horiz .download_link {
             display: block;
             padding: 15px;
@@ -77,7 +84,19 @@
             font-size: 14px;
         }
 
-        .repo-card {
+        .skill-tag {
+            display: inline-block;
+            background: #e9ecef;
+            color: #2b4c7e;
+            padding: 6px 12px;
+            border-radius: 15px;
+            font-weight: bold;
+            font-size: 13px;
+            margin: 4px;
+            border: 1px solid #ced4da;
+        }
+
+        .card-item {
             border: 1px solid #e3e3e3;
             background: #fafafa;
             padding: 15px;
@@ -85,35 +104,76 @@
             margin-bottom: 15px;
             text-align: left;
             transition: all 0.2s ease-in-out;
+            height: 100%;
         }
 
-            .repo-card:hover {
+            .card-item:hover {
                 border-color: #2b4c7e;
                 background: #fff;
                 box-shadow: 0 2px 6px rgba(0,0,0,0.08);
             }
 
-            .repo-card h4 {
+            .card-item h4 {
                 margin-top: 0;
                 color: #2b4c7e;
             }
 
-            .repo-card p {
+            .card-item p {
                 color: #666;
                 font-size: 13px;
                 min-height: 36px;
             }
 
-        .repo-lang {
+        .card-meta {
             font-weight: bold;
             font-size: 12px;
             color: #888;
         }
+
+        .footer-credit {
+            margin-top: 25px;
+            font-size: 22px;
+            font-weight: bold;
+            color: #2b4c7e;
+        }
+
+        .footer-sub {
+            font-size: 16px;
+            color: #d9534f;
+            margin-top: 5px;
+            font-style: italic;
+        }
     </style>
 </head>
 <body>
+
+    <!-- Cookie & Announcement Modal -->
+    <div class="modal fade" id="cookieModal" tabindex="-1" role="dialog" aria-labelledby="cookieModalLabel" data-backdrop="static">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title" id="cookieModalLabel">🍪 Cookies & Project Status Notice</h4>
+                </div>
+                <div class="modal-body">
+                    <p><strong>FreeWAY Announcement:</strong></p>
+                    <p style="background: #f8f9fa; border-left: 3px solid #2b4c7e; padding: 10px; font-size: 14px;">
+                        No, FreeWAY has not been stopped. It is still running, but as a single developer, it's simply a lot. It will be finished when I have more developers on my team.
+                    </p>
+                    <hr>
+                    <p style="font-size: 13px; color: #666;">
+                        We use minimal cookies for site functionality and preferences. You can choose to accept all or disable non-essential tracking.
+                    </p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" onclick="setCookiePreference(false)">Disable / Decline</button>
+                    <button type="button" class="btn btn-primary" onclick="setCookiePreference(true)">Accept All</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <div class="bluej_main container">
-        <!-- Top Section -->
+        <!-- Header / Main Intro -->
         <div class="row">
             <div class="text-center col-md-6">
                 <h1>Nova / Baummarder</h1>
@@ -126,6 +186,7 @@
             </div>
             <div class="col-md-6 text-center">
                 <img src="https://avatars.githubusercontent.com/u/219540602?v=4" class="profile-img" alt="Baummarder Avatar" />
+                <div class="pfp-caption">⚠️ Friendly reminder: That's a pine marten (Baummarder) on my pfp, not a dog! 🌲🦦</div>
             </div>
         </div>
 
@@ -133,18 +194,31 @@
             <div class="col-md-8 col-md-offset-2">
                 <h5><strong>Location:</strong> Heilbronn, Germany | <strong>Pronouns:</strong> xier/xiers (or any pronouns)</h5>
                 <h5><strong>Identity:</strong> Xenogender / Demi-boy | Furry & Femboy</h5>
+                <h5><strong>Views / Politics:</strong> Communist 🚩 | Antifa 🏴</h5>
             </div>
         </div>
 
         <hr />
 
-        <!-- Story Section -->
+        <!-- Story & Info -->
         <div class="row">
             <div class="col-md-10 col-md-offset-1">
                 <h2 class="text-center">Who am I?</h2>
                 <p style="font-size:16px; line-height:1.6;">
                     I started developing at the age of 14 in an IMP class at school with HTML and Processing. From there, I expanded into Python and Java, building small games, Minecraft mods, and various hardware and software experiments.
                 </p>
+
+                <!-- Tech Stack Badges -->
+                <div class="text-center" style="margin: 20px 0;">
+                    <span class="skill-tag">☕ Java</span>
+                    <span class="skill-tag">🐍 Python</span>
+                    <span class="skill-tag">🌐 HTML / CSS</span>
+                    <span class="skill-tag">⚙️ Processing</span>
+                    <span class="skill-tag">🛠️ Hardware Mods</span>
+                    <span class="skill-tag">🔌 Custom Firmware</span>
+                    <span class="skill-tag">💙 BlueJ</span>
+                    <span class="skill-tag">⚡ VS Code & IntelliJ</span>
+                </div>
 
                 <div class="note-box">
                     <strong>Project Status:</strong> Many of my projects (including several Minecraft mods) are currently private and in active development. Some of them might be released publicly later!
@@ -158,16 +232,15 @@
 
         <hr />
 
-        <!-- Automatic GitHub Repositories Section -->
+        <!-- GitHub Repositories (Auto-Loaded via API) -->
         <div class="row">
             <div class="col-md-12 text-center">
                 <h2>Public GitHub Repositories</h2>
-                <p style="color: #777;">Automatically fetched via GitHub API</p>
+                <p style="color: #777;">Automatically fetched from GitHub</p>
             </div>
         </div>
 
         <div class="row" id="github-repos" style="margin-top: 20px;">
-            <!-- Repositories werden hier per JavaScript geladen -->
             <div class="text-center col-md-12">
                 <p><em>Loading repositories...</em></p>
             </div>
@@ -175,7 +248,52 @@
 
         <hr />
 
-        <!-- Links & Platforms Section -->
+        <!-- Modrinth Projects (Auto-Loaded via API) -->
+        <div class="row">
+            <div class="col-md-12 text-center">
+                <h2>Modrinth Projects & Mods</h2>
+                <p style="color: #777;">Automatically fetched from Modrinth (User: Concorde)</p>
+            </div>
+        </div>
+
+        <div class="row" id="modrinth-projects" style="margin-top: 20px;">
+            <div class="text-center col-md-12">
+                <p><em>Loading Modrinth projects...</em></p>
+            </div>
+        </div>
+
+        <hr />
+
+        <!-- Direct Crypto Donation Section (No Stripe) -->
+        <div class="row">
+            <div class="col-md-10 col-md-offset-1 text-center">
+                <h2>Support / Donate ☕</h2>
+                <p style="color: #666; font-size: 15px;">
+                    Want to support my work? You can donate in <strong>USD ($)</strong>, <strong>EUR (€)</strong>, or <strong>GBP (£)</strong> directly via Ethereum & ERC-20 Tokens — completely decentralized, peer-to-peer, and without Stripe.
+                </p>
+
+                <div style="margin-top: 25px;" class="row text-center">
+                    <div class="col-md-8 col-md-offset-2">
+                        <div style="border: 1px solid #ddd; background: #fafafa; padding: 20px; border-radius: 8px;">
+                            <h4 style="color: #627eea; margin-top:0;">Ξ Ethereum Wallet (ETH / USDT / USDC)</h4>
+                            <p style="font-size: 13px; color: #777;">Accepts ETH and any ERC-20 Stablecoins ($/€/£)</p>
+
+                            <div class="input-group" style="margin-bottom: 10px;">
+                                <input type="text" value="0x255625071B7CcD876e511b854325522aC973e633" id="eth-addr" class="form-control" readonly style="font-family: monospace; font-size: 13px; text-align: center;">
+                                <span class="input-group-btn">
+                                    <button onclick="copyWallet('eth-addr')" class="btn btn-primary" type="button">📋 Copy</button>
+                                </span>
+                            </div>
+                            <small class="text-muted">Network: Ethereum Mainnet / EVM compatible</small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <hr />
+
+        <!-- Links & Socials -->
         <div class="text-center row">
             <h2>Links & Profiles</h2>
             <h4>Find Nova across the web</h4>
@@ -217,13 +335,19 @@
 
         <hr />
 
-        <!-- Footer Info Section -->
+        <!-- Footer -->
         <div class="row text-center" style="margin-top: 20px;">
             <div class="col-md-6 col-md-offset-3">
                 <h3>Why "Baummarder"?</h3>
                 <p style="font-size:small">
                     "It's simple: they are cool and eat into anything :)"
                 </p>
+                <div class="footer-credit">
+                    Made with &lt;3 by Baummarder in Heilbronn
+                </div>
+                <div class="footer-sub">
+                    Kann ich dein Hundi sein? 🐾
+                </div>
             </div>
         </div>
     </div>
@@ -232,15 +356,35 @@
     <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
-    <!-- JavaScript zum Laden der GitHub Repositories -->
     <script>
+        // Wallet Copy Script
+        function copyWallet(elementId) {
+            var copyText = document.getElementById(elementId);
+            copyText.select();
+            copyText.setSelectionRange(0, 99999);
+            navigator.clipboard.writeText(copyText.value);
+            alert("Wallet address copied to clipboard!");
+        }
+
+        // Cookie Modal Logic
+        function setCookiePreference(accept) {
+            localStorage.setItem('cookieConsent', accept ? 'accepted' : 'declined');
+            $('#cookieModal').modal('hide');
+        }
+
         $(document).ready(function () {
-            var username = 'baummarder';
-            $.getJSON('https://api.github.com/users/' + username + '/repos?sort=updated', function (data) {
+            // Show cookie modal if user hasn't made a choice yet
+            if (!localStorage.getItem('cookieConsent')) {
+                $('#cookieModal').modal('show');
+            }
+
+            // 1. Fetch GitHub Repositories
+            var ghUsername = 'baummarder';
+            $.getJSON('https://api.github.com/users/' + ghUsername + '/repos?sort=updated', function (data) {
                 var repoContainer = $('#github-repos');
                 repoContainer.empty();
 
-                if (data.length === 0) {
+                if (!data || data.length === 0) {
                     repoContainer.html('<div class="col-md-12 text-center"><p>No public repositories found.</p></div>');
                     return;
                 }
@@ -250,18 +394,48 @@
                     var lang = repo.language ? repo.language : 'Code';
 
                     var repoHtml = `
-                  <div class="col-md-4">
-                    <div class="repo-card">
+                  <div class="col-md-4" style="margin-bottom: 15px;">
+                    <div class="card-item">
                       <h4><a href="${repo.html_url}" target="_blank">${repo.name}</a></h4>
                       <p>${desc}</p>
-                      <span class="repo-lang">💻 ${lang}</span>
+                      <span class="card-meta">💻 ${lang}</span>
                     </div>
                   </div>
                 `;
                     repoContainer.append(repoHtml);
                 });
             }).fail(function () {
-                $('#github-repos').html('<div class="col-md-12 text-center"><p>Failed to load repositories from GitHub.</p></div>');
+                $('#github-repos').html('<div class="col-md-12 text-center"><p>Failed to load GitHub repositories.</p></div>');
+            });
+
+            // 2. Fetch Modrinth Projects
+            var mrUser = 'Concorde';
+            $.getJSON('https://api.modrinth.com/v2/user/' + mrUser + '/projects', function (projects) {
+                var modContainer = $('#modrinth-projects');
+                modContainer.empty();
+
+                if (!projects || projects.length === 0) {
+                    modContainer.html('<div class="col-md-12 text-center"><p>No public Modrinth projects found yet.</p></div>');
+                    return;
+                }
+
+                $.each(projects, function (index, proj) {
+                    var desc = proj.description ? proj.description : 'No description provided.';
+                    var projectUrl = 'https://modrinth.com/' + proj.project_type + '/' + proj.slug;
+
+                    var modHtml = `
+                  <div class="col-md-4" style="margin-bottom: 15px;">
+                    <div class="card-item">
+                      <h4><a href="${projectUrl}" target="_blank">${proj.title}</a></h4>
+                      <p>${desc}</p>
+                      <span class="card-meta">📦 ${proj.project_type.toUpperCase()} | 📥 ${proj.downloads} Downloads</span>
+                    </div>
+                  </div>
+                `;
+                    modContainer.append(modHtml);
+                });
+            }).fail(function () {
+                $('#modrinth-projects').html('<div class="col-md-12 text-center"><p>No public Modrinth projects found yet (or private).</p></div>');
             });
         });
     </script>
