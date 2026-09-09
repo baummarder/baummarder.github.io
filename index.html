@@ -53,6 +53,7 @@
             text-decoration: none;
             color: #333;
             margin-bottom: 10px;
+            height: 100%;
         }
 
             .download_horiz .download_link:hover {
@@ -74,6 +75,39 @@
             padding: 12px;
             margin-top: 15px;
             font-size: 14px;
+        }
+
+        .repo-card {
+            border: 1px solid #e3e3e3;
+            background: #fafafa;
+            padding: 15px;
+            border-radius: 6px;
+            margin-bottom: 15px;
+            text-align: left;
+            transition: all 0.2s ease-in-out;
+        }
+
+            .repo-card:hover {
+                border-color: #2b4c7e;
+                background: #fff;
+                box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+            }
+
+            .repo-card h4 {
+                margin-top: 0;
+                color: #2b4c7e;
+            }
+
+            .repo-card p {
+                color: #666;
+                font-size: 13px;
+                min-height: 36px;
+            }
+
+        .repo-lang {
+            font-weight: bold;
+            font-size: 12px;
+            color: #888;
         }
     </style>
 </head>
@@ -97,8 +131,8 @@
 
         <div class="row text-center" style="padding-top:10px;">
             <div class="col-md-8 col-md-offset-2">
-                <h5><strong>Location:</strong> Heilbronn, Germany | <strong>Pronouns:</strong> Any pronouns (he/she/they)</h5>
-                <h5><strong>Identity:</strong> Demi-boy | Furry & Femboy</h5>
+                <h5><strong>Location:</strong> Heilbronn, Germany | <strong>Pronouns:</strong> xier/xiers (or any pronouns)</h5>
+                <h5><strong>Identity:</strong> Xenogender / Demi-boy | Furry & Femboy</h5>
             </div>
         </div>
 
@@ -124,9 +158,26 @@
 
         <hr />
 
+        <!-- Automatic GitHub Repositories Section -->
+        <div class="row">
+            <div class="col-md-12 text-center">
+                <h2>Public GitHub Repositories</h2>
+                <p style="color: #777;">Automatically fetched via GitHub API</p>
+            </div>
+        </div>
+
+        <div class="row" id="github-repos" style="margin-top: 20px;">
+            <!-- Repositories werden hier per JavaScript geladen -->
+            <div class="text-center col-md-12">
+                <p><em>Loading repositories...</em></p>
+            </div>
+        </div>
+
+        <hr />
+
         <!-- Links & Platforms Section -->
         <div class="text-center row">
-            <h2>Links & Projects</h2>
+            <h2>Links & Profiles</h2>
             <h4>Find Nova across the web</h4>
         </div>
 
@@ -180,5 +231,39 @@
     <!-- Scripts -->
     <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+    <!-- JavaScript zum Laden der GitHub Repositories -->
+    <script>
+        $(document).ready(function () {
+            var username = 'baummarder';
+            $.getJSON('https://api.github.com/users/' + username + '/repos?sort=updated', function (data) {
+                var repoContainer = $('#github-repos');
+                repoContainer.empty();
+
+                if (data.length === 0) {
+                    repoContainer.html('<div class="col-md-12 text-center"><p>No public repositories found.</p></div>');
+                    return;
+                }
+
+                $.each(data, function (index, repo) {
+                    var desc = repo.description ? repo.description : 'No description provided.';
+                    var lang = repo.language ? repo.language : 'Code';
+
+                    var repoHtml = `
+                  <div class="col-md-4">
+                    <div class="repo-card">
+                      <h4><a href="${repo.html_url}" target="_blank">${repo.name}</a></h4>
+                      <p>${desc}</p>
+                      <span class="repo-lang">💻 ${lang}</span>
+                    </div>
+                  </div>
+                `;
+                    repoContainer.append(repoHtml);
+                });
+            }).fail(function () {
+                $('#github-repos').html('<div class="col-md-12 text-center"><p>Failed to load repositories from GitHub.</p></div>');
+            });
+        });
+    </script>
 </body>
 </html>
