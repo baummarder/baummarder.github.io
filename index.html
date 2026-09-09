@@ -51,6 +51,41 @@
             font-style: italic;
         }
 
+        .discord-box {
+            margin-top: 15px;
+            display: inline-block;
+            padding: 8px 16px;
+            background: #f0f0f0;
+            border-radius: 20px;
+            border: 1px solid #ddd;
+            font-size: 13px;
+        }
+
+        .status-dot {
+            height: 10px;
+            width: 10px;
+            background-color: #747f8d;
+            border-radius: 50%;
+            display: inline-block;
+            margin-right: 5px;
+        }
+
+        .status-online {
+            background-color: #43b581;
+        }
+
+        .status-idle {
+            background-color: #faa61a;
+        }
+
+        .status-dnd {
+            background-color: #f04747;
+        }
+
+        .status-offline {
+            background-color: #747f8d;
+        }
+
         .download_horiz .download_link {
             display: block;
             padding: 15px;
@@ -187,6 +222,15 @@
             <div class="col-md-6 text-center">
                 <img src="https://avatars.githubusercontent.com/u/219540602?v=4" class="profile-img" alt="Baummarder Avatar" />
                 <div class="pfp-caption">⚠️ Friendly reminder: That's a pine marten (Baummarder) on my pfp, not a dog! 🌲🦦</div>
+
+                <!-- Live Discord Status Widget -->
+                <div>
+                    <div class="discord-box">
+                        <span id="discord-dot" class="status-dot status-offline"></span>
+                        <strong id="discord-status-text">Discord Loading...</strong>
+                        <div id="discord-activity" style="font-size: 11px; color: #888; margin-top: 2px;">Checking activity...</div>
+                    </div>
+                </div>
             </div>
         </div>
 
@@ -372,11 +416,51 @@
             $('#cookieModal').modal('hide');
         }
 
+        // Live Discord Status (Lanyard API)
+        function fetchDiscordStatus() {
+            var discordUserId = '1488225887542317214';
+
+            $.getJSON('https://api.lanyard.rest/v1/users/' + discordUserId, function (res) {
+                if (res && res.success) {
+                    var data = res.data;
+                    var status = data.discord_status;
+                    var dot = $('#discord-dot');
+
+                    dot.removeClass('status-online status-idle status-dnd status-offline');
+                    dot.addClass('status-' + status);
+
+                    var statusNames = {
+                        'online': 'Online',
+                        'idle': 'Idle / Away',
+                        'dnd': 'Do Not Disturb',
+                        'offline': 'Offline'
+                    };
+
+                    $('#discord-status-text').text('Discord: ' + (statusNames[status] || status));
+
+                    if (data.activities && data.activities.length > 0) {
+                        var act = data.activities[0];
+                        var actText = act.name;
+                        if (act.details) actText += ' - ' + act.details;
+                        $('#discord-activity').text('🎮 ' + actText);
+                    } else {
+                        $('#discord-activity').text('No active status');
+                    }
+                }
+            }).fail(function () {
+                $('#discord-status-text').text('Discord Status Offline');
+                $('#discord-activity').text('Lanyard API unavailable');
+            });
+        }
+
         $(document).ready(function () {
             // Show cookie modal if user hasn't made a choice yet
             if (!localStorage.getItem('cookieConsent')) {
                 $('#cookieModal').modal('show');
             }
+
+            // Fetch Live Discord Status
+            fetchDiscordStatus();
 
             // 1. Fetch GitHub Repositories
             var ghUsername = 'baummarder';
