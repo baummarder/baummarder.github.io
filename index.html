@@ -78,21 +78,10 @@
             margin-right: 5px;
         }
 
-        .status-online {
-            background-color: #43b581;
-        }
-
-        .status-idle {
-            background-color: #faa61a;
-        }
-
-        .status-dnd {
-            background-color: #f04747;
-        }
-
-        .status-offline {
-            background-color: #747f8d;
-        }
+        .status-online { background-color: #43b581; }
+        .status-idle { background-color: #faa61a; }
+        .status-dnd { background-color: #f04747; }
+        .status-offline { background-color: #747f8d; }
 
         .download_horiz .download_link {
             display: block;
@@ -107,10 +96,10 @@
             transition: all 0.2s ease-in-out;
         }
 
-            .download_horiz .download_link:hover {
-                background: #eef5f0;
-                border-color: #2d5a27;
-            }
+        .download_horiz .download_link:hover {
+            background: #eef5f0;
+            border-color: #2d5a27;
+        }
 
         /* Wald-Farbakzente für Infoboxen */
         .fun-fact {
@@ -154,22 +143,22 @@
             height: 100%;
         }
 
-            .card-item:hover {
-                border-color: #2d5a27;
-                background: #fff;
-                box-shadow: 0 4px 10px rgba(45, 90, 39, 0.12);
-            }
+        .card-item:hover {
+            border-color: #2d5a27;
+            background: #fff;
+            box-shadow: 0 4px 10px rgba(45, 90, 39, 0.12);
+        }
 
-            .card-item h4 {
-                margin-top: 0;
-                color: #2d5a27;
-            }
+        .card-item h4 {
+            margin-top: 0;
+            color: #2d5a27;
+        }
 
-            .card-item p {
-                color: #4b6152;
-                font-size: 13px;
-                min-height: 36px;
-            }
+        .card-item p {
+            color: #4b6152;
+            font-size: 13px;
+            min-height: 36px;
+        }
 
         .card-meta {
             font-weight: bold;
@@ -196,11 +185,10 @@
             background-color: #2d5a27;
             border-color: #23481e;
         }
-
-            .btn-primary:hover, .btn-primary:focus {
-                background-color: #21431d;
-                border-color: #193316;
-            }
+        .btn-primary:hover, .btn-primary:focus {
+            background-color: #21431d;
+            border-color: #193316;
+        }
 
         hr {
             border-top: 1px solid #d8e5da;
@@ -265,6 +253,7 @@
             <div class="col-md-8 col-md-offset-2">
                 <h5><strong>Location:</strong> Heilbronn, Germany | <strong>Pronouns:</strong> xier/xiers (or any pronouns)</h5>
                 <h5><strong>Identity:</strong> Xenogender / Demi-boy | Furry & Femboy 🐾</h5>
+                <h5><strong>Neurodiversity & Vision:</strong> Autistic ♾️ | Green-Brown Colorblind (Deutan) 👁️</h5>
                 <h5><strong>Views / Politics:</strong> Communist 🚩 | Antifa 🏴</h5>
             </div>
         </div>
@@ -505,14 +494,14 @@
                     var lang = repo.language ? repo.language : 'Code';
 
                     var repoHtml = `
-                      <div class="col-md-4" style="margin-bottom: 15px;">
-                        <div class="card-item">
-                          <h4><a href="${repo.html_url}" target="_blank">${repo.name}</a></h4>
-                          <p>${desc}</p>
-                          <span class="card-meta">💻 ${lang}</span>
-                        </div>
-                      </div>
-                    `;
+                  <div class="col-md-4" style="margin-bottom: 15px;">
+                    <div class="card-item">
+                      <h4><a href="${repo.html_url}" target="_blank">${repo.name}</a></h4>
+                      <p>${desc}</p>
+                      <span class="card-meta">💻 ${lang}</span>
+                    </div>
+                  </div>
+                `;
                     repoContainer.append(repoHtml);
                 });
             }).fail(function () {
@@ -535,14 +524,14 @@
                     var projectUrl = 'https://modrinth.com/' + proj.project_type + '/' + proj.slug;
 
                     var modHtml = `
-                      <div class="col-md-4" style="margin-bottom: 15px;">
-                        <div class="card-item">
-                          <h4><a href="${projectUrl}" target="_blank">${proj.title}</a></h4>
-                          <p>${desc}</p>
-                          <span class="card-meta">📦 ${proj.project_type.toUpperCase()} | 📥 ${proj.downloads} Downloads</span>
-                        </div>
-                      </div>
-                    `;
+                  <div class="col-md-4" style="margin-bottom: 15px;">
+                    <div class="card-item">
+                      <h4><a href="${projectUrl}" target="_blank">${proj.title}</a></h4>
+                      <p>${desc}</p>
+                      <span class="card-meta">📦 ${proj.project_type.toUpperCase()} | 📥 ${proj.downloads} Downloads</span>
+                    </div>
+                  </div>
+                `;
                     modContainer.append(modHtml);
                 });
             }).fail(function () {
