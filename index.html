@@ -9,8 +9,10 @@
     <link href='https://fonts.googleapis.com/css?family=Arbutus+Slab' rel='stylesheet' type='text/css'>
     <style>
         body {
-            background-color: #f4f4f4;
+            /* Dezent waldiges Grün im Hintergrund */
+            background-color: #e8efe9;
             font-family: Arial, sans-serif;
+            color: #2c3e35;
         }
 
         .bluej_main {
@@ -19,34 +21,40 @@
             margin-top: 20px;
             margin-bottom: 20px;
             border-radius: 8px;
-            box-shadow: 0px 2px 8px rgba(0,0,0,0.1);
+            box-shadow: 0px 4px 12px rgba(27, 59, 40, 0.08);
+            border-top: 5px solid #2d5a27; /* Waldgrüne Topbar */
         }
 
         h1 {
             font-family: 'Arbutus Slab', serif;
             font-size: 48px;
-            color: #2b4c7e;
+            color: #2d5a27; /* Waldgrün */
+        }
+
+        h2, h3, h4 {
+            color: #1e3d1a;
         }
 
         .bluej_lead {
             font-size: 18px;
-            color: #555;
+            color: #3d5245;
         }
 
         .bluej_quote {
             font-style: italic;
-            color: #777;
+            color: #5b7364;
         }
 
         .profile-img {
             max-height: 250px;
             border-radius: 50%;
-            border: 4px solid #2b4c7e;
+            border: 4px solid #2d5a27;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.15);
         }
 
         .pfp-caption {
             font-size: 12px;
-            color: #777;
+            color: #5b7364;
             margin-top: 8px;
             font-style: italic;
         }
@@ -55,9 +63,9 @@
             margin-top: 15px;
             display: inline-block;
             padding: 8px 16px;
-            background: #f0f0f0;
+            background: #f1f6f2;
             border-radius: 20px;
-            border: 1px solid #ddd;
+            border: 1px solid #c8d8cb;
             font-size: 13px;
         }
 
@@ -89,51 +97,55 @@
         .download_horiz .download_link {
             display: block;
             padding: 15px;
-            border: 1px solid #ddd;
+            border: 1px solid #c8d8cb;
             border-radius: 5px;
-            background: #fafafa;
+            background: #f7faf8;
             text-decoration: none;
-            color: #333;
+            color: #1e3d1a;
             margin-bottom: 10px;
             height: 100%;
+            transition: all 0.2s ease-in-out;
         }
 
             .download_horiz .download_link:hover {
-                background: #f0f0f0;
-                border-color: #bbb;
+                background: #eef5f0;
+                border-color: #2d5a27;
             }
 
+        /* Wald-Farbakzente für Infoboxen */
         .fun-fact {
-            background-color: #eef4fb;
-            border-left: 4px solid #2b4c7e;
+            background-color: #f0f7f2;
+            border-left: 4px solid #2d5a27;
             padding: 12px;
             margin-top: 15px;
             font-size: 14px;
+            color: #234220;
         }
 
         .note-box {
-            background-color: #fff9e6;
-            border-left: 4px solid #f0ad4e;
+            background-color: #fdf8eb;
+            border-left: 4px solid #d99b26;
             padding: 12px;
             margin-top: 15px;
             font-size: 14px;
+            color: #5a4310;
         }
 
         .skill-tag {
             display: inline-block;
-            background: #e9ecef;
-            color: #2b4c7e;
+            background: #e1ebe3;
+            color: #1e3d1a;
             padding: 6px 12px;
             border-radius: 15px;
             font-weight: bold;
             font-size: 13px;
             margin: 4px;
-            border: 1px solid #ced4da;
+            border: 1px solid #b7ccbb;
         }
 
         .card-item {
-            border: 1px solid #e3e3e3;
-            background: #fafafa;
+            border: 1px solid #d0ded2;
+            background: #f9fbf9;
             padding: 15px;
             border-radius: 6px;
             margin-bottom: 15px;
@@ -143,18 +155,18 @@
         }
 
             .card-item:hover {
-                border-color: #2b4c7e;
+                border-color: #2d5a27;
                 background: #fff;
-                box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+                box-shadow: 0 4px 10px rgba(45, 90, 39, 0.12);
             }
 
             .card-item h4 {
                 margin-top: 0;
-                color: #2b4c7e;
+                color: #2d5a27;
             }
 
             .card-item p {
-                color: #666;
+                color: #4b6152;
                 font-size: 13px;
                 min-height: 36px;
             }
@@ -162,21 +174,36 @@
         .card-meta {
             font-weight: bold;
             font-size: 12px;
-            color: #888;
+            color: #6b8573;
         }
 
         .footer-credit {
             margin-top: 25px;
             font-size: 22px;
             font-weight: bold;
-            color: #2b4c7e;
+            color: #2d5a27;
         }
 
         .footer-sub {
             font-size: 16px;
-            color: #d9534f;
+            color: #c0392b;
             margin-top: 5px;
             font-style: italic;
+        }
+
+        /* Waldgrüner primärer Button */
+        .btn-primary {
+            background-color: #2d5a27;
+            border-color: #23481e;
+        }
+
+            .btn-primary:hover, .btn-primary:focus {
+                background-color: #21431d;
+                border-color: #193316;
+            }
+
+        hr {
+            border-top: 1px solid #d8e5da;
         }
     </style>
 </head>
@@ -186,12 +213,12 @@
     <div class="modal fade" id="cookieModal" tabindex="-1" role="dialog" aria-labelledby="cookieModalLabel" data-backdrop="static">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
-                <div class="modal-header">
-                    <h4 class="modal-title" id="cookieModalLabel">🍪 Cookies & Project Status Notice</h4>
+                <div class="modal-header" style="background: #2d5a27; color: white; border-radius: 5px 5px 0 0;">
+                    <h4 class="modal-title" id="cookieModalLabel">🌲 Cookies & Project Status Notice</h4>
                 </div>
                 <div class="modal-body">
                     <p><strong>FreeWAY Announcement:</strong></p>
-                    <p style="background: #f8f9fa; border-left: 3px solid #2b4c7e; padding: 10px; font-size: 14px;">
+                    <p style="background: #f0f7f2; border-left: 3px solid #2d5a27; padding: 10px; font-size: 14px;">
                         No, FreeWAY has not been stopped. It is still running, but as a single developer, it's simply a lot. It will be finished when I have more developers on my team.
                     </p>
                     <hr>
@@ -211,7 +238,7 @@
         <!-- Header / Main Intro -->
         <div class="row">
             <div class="text-center col-md-6">
-                <h1>Nova / Baummarder</h1>
+                <h1>Nova / Baummarder 🌲</h1>
                 <p class="lead">
                     <span class="bluej_lead">Developer from Germany working on software, hardware, and Minecraft mods.</span>
                 </p>
@@ -228,7 +255,7 @@
                     <div class="discord-box">
                         <span id="discord-dot" class="status-dot status-offline"></span>
                         <strong id="discord-status-text">Discord Loading...</strong>
-                        <div id="discord-activity" style="font-size: 11px; color: #888; margin-top: 2px;">Checking activity...</div>
+                        <div id="discord-activity" style="font-size: 11px; color: #6b8573; margin-top: 2px;">Checking activity...</div>
                     </div>
                 </div>
             </div>
@@ -237,7 +264,7 @@
         <div class="row text-center" style="padding-top:10px;">
             <div class="col-md-8 col-md-offset-2">
                 <h5><strong>Location:</strong> Heilbronn, Germany | <strong>Pronouns:</strong> xier/xiers (or any pronouns)</h5>
-                <h5><strong>Identity:</strong> Xenogender / Demi-boy | Furry & Femboy</h5>
+                <h5><strong>Identity:</strong> Xenogender / Demi-boy | Furry & Femboy 🐾</h5>
                 <h5><strong>Views / Politics:</strong> Communist 🚩 | Antifa 🏴</h5>
             </div>
         </div>
@@ -280,7 +307,7 @@
         <div class="row">
             <div class="col-md-12 text-center">
                 <h2>Public GitHub Repositories</h2>
-                <p style="color: #777;">Automatically fetched from GitHub</p>
+                <p style="color: #6b8573;">Automatically fetched from GitHub</p>
             </div>
         </div>
 
@@ -296,7 +323,7 @@
         <div class="row">
             <div class="col-md-12 text-center">
                 <h2>Modrinth Projects & Mods</h2>
-                <p style="color: #777;">Automatically fetched from Modrinth (User: Concorde)</p>
+                <p style="color: #6b8573;">Automatically fetched from Modrinth (User: Concorde)</p>
             </div>
         </div>
 
@@ -312,15 +339,15 @@
         <div class="row">
             <div class="col-md-10 col-md-offset-1 text-center">
                 <h2>Support / Donate ☕</h2>
-                <p style="color: #666; font-size: 15px;">
+                <p style="color: #4b6152; font-size: 15px;">
                     Want to support my work? You can donate in <strong>USD ($)</strong>, <strong>EUR (€)</strong>, or <strong>GBP (£)</strong> directly via Ethereum & ERC-20 Tokens — completely decentralized, peer-to-peer, and without Stripe.
                 </p>
 
                 <div style="margin-top: 25px;" class="row text-center">
                     <div class="col-md-8 col-md-offset-2">
-                        <div style="border: 1px solid #ddd; background: #fafafa; padding: 20px; border-radius: 8px;">
-                            <h4 style="color: #627eea; margin-top:0;">Ξ Ethereum Wallet (ETH / USDT / USDC)</h4>
-                            <p style="font-size: 13px; color: #777;">Accepts ETH and any ERC-20 Stablecoins ($/€/£)</p>
+                        <div style="border: 1px solid #c8d8cb; background: #f7faf8; padding: 20px; border-radius: 8px;">
+                            <h4 style="color: #2d5a27; margin-top:0;">Ξ Ethereum Wallet (ETH / USDT / USDC)</h4>
+                            <p style="font-size: 13px; color: #6b8573;">Accepts ETH and any ERC-20 Stablecoins ($/€/£)</p>
 
                             <div class="input-group" style="margin-bottom: 10px;">
                                 <input type="text" value="0x255625071B7CcD876e511b854325522aC973e633" id="eth-addr" class="form-control" readonly style="font-family: monospace; font-size: 13px; text-align: center;">
@@ -382,7 +409,7 @@
         <!-- Footer -->
         <div class="row text-center" style="margin-top: 20px;">
             <div class="col-md-6 col-md-offset-3">
-                <h3>Why "Baummarder"?</h3>
+                <h3>Why "Baummarder"? 🦦</h3>
                 <p style="font-size:small">
                     "It's simple: they are cool and eat into anything :)"
                 </p>
@@ -478,14 +505,14 @@
                     var lang = repo.language ? repo.language : 'Code';
 
                     var repoHtml = `
-                  <div class="col-md-4" style="margin-bottom: 15px;">
-                    <div class="card-item">
-                      <h4><a href="${repo.html_url}" target="_blank">${repo.name}</a></h4>
-                      <p>${desc}</p>
-                      <span class="card-meta">💻 ${lang}</span>
-                    </div>
-                  </div>
-                `;
+                      <div class="col-md-4" style="margin-bottom: 15px;">
+                        <div class="card-item">
+                          <h4><a href="${repo.html_url}" target="_blank">${repo.name}</a></h4>
+                          <p>${desc}</p>
+                          <span class="card-meta">💻 ${lang}</span>
+                        </div>
+                      </div>
+                    `;
                     repoContainer.append(repoHtml);
                 });
             }).fail(function () {
@@ -508,14 +535,14 @@
                     var projectUrl = 'https://modrinth.com/' + proj.project_type + '/' + proj.slug;
 
                     var modHtml = `
-                  <div class="col-md-4" style="margin-bottom: 15px;">
-                    <div class="card-item">
-                      <h4><a href="${projectUrl}" target="_blank">${proj.title}</a></h4>
-                      <p>${desc}</p>
-                      <span class="card-meta">📦 ${proj.project_type.toUpperCase()} | 📥 ${proj.downloads} Downloads</span>
-                    </div>
-                  </div>
-                `;
+                      <div class="col-md-4" style="margin-bottom: 15px;">
+                        <div class="card-item">
+                          <h4><a href="${projectUrl}" target="_blank">${proj.title}</a></h4>
+                          <p>${desc}</p>
+                          <span class="card-meta">📦 ${proj.project_type.toUpperCase()} | 📥 ${proj.downloads} Downloads</span>
+                        </div>
+                      </div>
+                    `;
                     modContainer.append(modHtml);
                 });
             }).fail(function () {
